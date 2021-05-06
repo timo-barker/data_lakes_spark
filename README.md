@@ -23,14 +23,15 @@ YOUR_BOOTSTRAP_FILENAME: optional, should be your bootstrap file, executable (.s
 ```
 aws emr create-cluster 
 --name <YOUR_CLUSTER_NAME> 
---use-default-roles  
+--use-default-roles 
 --release-label emr-5.28.0 
 --instance-count 3 
---applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin  
+--applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive 
 --bootstrap-actions Path=<YOUR_BOOTSTRAP_FILENAME> 
 --ec2-attributes KeyName=<YOUR_KEY_NAME> 
 --instance-type m5.xlarge 
---auto-terminate
+--region us-west-2 
+--auto-terminate 
 ```
 
 This will give you something like this..
