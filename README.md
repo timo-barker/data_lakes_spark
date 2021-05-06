@@ -8,7 +8,7 @@ We'll be creating an EMR cluster for the exercise.
 2. Create an AWS EC2 key pair. Key pairs ensure that you alone have access to the instances that you launch. Go to the AWS EC2 console, click Key Pairs. On the Key Pairs page, click Create Key Pair. In the Create Key Pair dialog box, enter a name for your key pair, such as, *MyKeyPair*. Click Create. Save the resulting PEM file in a safe location.
 3. Add a new rule to allow ingress to Port 22 for SSH connections from your IP address. Go to the AWS EMR console, select the name of your cluster. In the Summary tab, go to the Security and access section and click the link for `Security groups for Master`. When the screen refreshes, select the Security group ID that corresponds to the Security group name for `ElasticMapReduce-master`. Click the Edit inbound rules button. Scroll down and click the Add rule button. Select `SSH` from the first drop down menu. Select `My IP` from the second drop down manu. Click Save rules at the bottom of the screen. Repeat this process if your IP address changes.
 
-### Initiate a Cluster
+### Create an EMR Cluster
 
 Once it's installed and configured, run the script below to launch a cluster. Revise anything in the `<>` to match your filename.
 
@@ -35,6 +35,6 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 
 For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` to see if this cluster is ready to go.
 
-With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The <a href='https://aws.amazon.com/emr/pricing' target='_blank'>Amazon EMR Pricing</a> for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
+With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
 
 ### SSH py files to Master
