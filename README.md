@@ -17,7 +17,7 @@ YOUR_KEY_NAME: required, your IAM key name that is saved under .ssh/ directory.
 YOUR_BOOTSTRAP_FILENAME: optional, should be your bootstrap file, executable (.sh file) in an accessible S3 location. If you aren't going to use the bootstrap file, you can removed `--bootstrap-actions` tag.
  
 ```
-aws emr create-cluster --name <YOUR_CLUSTER_NAME> --use-default-roles  --release-label emr-5.28.0 --instance-count 2 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin  --bootstrap-actions Path=<YOUR_BOOTSTRAP_FILENAME> --ec2-attributes KeyName=<YOUR_KEY_NAME> --instance-type m5.xlarge --instance-count 3 --auto-terminate
+aws emr create-cluster --name <YOUR_CLUSTER_NAME> --use-default-roles  --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin  --bootstrap-actions Path=<YOUR_BOOTSTRAP_FILENAME> --ec2-attributes KeyName=<YOUR_KEY_NAME> --instance-type m5.xlarge --auto-terminate
 ```
 
 This will give you something like this..
@@ -34,5 +34,7 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 `aws emr describe-cluter --cluster-id <CLUSTER_ID FROM ABOVE>`
 
 For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` to see if this cluster is ready to go.
+
+With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
 
 ### SSH py files to Master
