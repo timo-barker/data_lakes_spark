@@ -4,7 +4,7 @@ A fictitious music streaming startup, Sparkify, has grown their user base and so
 
 In this Udacity Data Engineering project, we will build an ETL pipeline for a data lake hosted on AWS S3. We will load data from S3, process the data into analytics tables using Spark, and load them back into S3. We will deploy this Spark process on a cluster using AWS.
 
-However, before we can perform the actual ETL pipeline work, we must first create an EMR cluster for the exercise. This requires considerable setup for the first time. <!--This learning path for this exercise is not Administrator, Security, or DevOps focused.--> The instructions below are provided <!--as copy/paste directions -->for readying our AWS resources<!-- quickly with little regard to perfection-->.
+However, before we can perform the actual ETL pipeline work, we must first create an EMR cluster for the exercise. This requires setup the first time. <!--This learning path for this exercise is not Administrator, Security, or DevOps focused.--> The instructions below are provided <!--as copy/paste directions -->for readying our AWS resources<!-- quickly with little regard to perfection-->.
 
 ## Prerequesites
 
