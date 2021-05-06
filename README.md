@@ -34,3 +34,5 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 `aws emr describe-cluter --cluster-id <CLUSTER_ID FROM ABOVE>`
 
 For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` to see if this cluster is ready to go.
+
+### SSH py files to Master
