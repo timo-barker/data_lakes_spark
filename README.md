@@ -38,7 +38,7 @@ This will give you something like this..
 ```
 {
     "ClusterId": "j-2PZ79NHXO7YYX",
-    "ClusterArn": "arn:aws:elasticmapreduce:us-east-2:027631528606:cluster/j-2PZ79NHXO7YYX"
+    "ClusterArn": "arn:aws:elasticmapreduce:us-west-2:027631528606:cluster/j-2PZ79NHXO7YYX"
 }
 ```
 
