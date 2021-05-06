@@ -35,6 +35,6 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 
 For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` to see if this cluster is ready to go.
 
-With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
+With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The <a href='https://aws.amazon.com/emr/pricing' target='_blank'>Amazon EMR Pricing</a> for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
 
 ### SSH py files to Master
