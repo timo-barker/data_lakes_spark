@@ -52,7 +52,7 @@ For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` 
 "MasterPublicDnsName": "ec2-18-205-96-185.compute-1.amazonaws.com"
 ```
 
-With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is $0.192/hr for on demand and $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be ($0.192 x 3 x 15/60) = $0.14.
+With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is USD $0.192/hr for on demand and USD $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be (USD $0.192 x 3 x 15/60) = USD $0.14.
 
 ## SSH py files to Master
 
