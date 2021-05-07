@@ -29,7 +29,10 @@ def create_spark_session():
     Create a spark session
     '''
     
-    spark = SparkSession         .builder         .config('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:2.7.0')         .getOrCreate()
+    spark = SparkSession \
+        .builder \
+        .config('spark.jars.packages', 'org.apache.hadoop:hadoop-aws:2.7.0') \
+        .getOrCreate()
     return spark
 
 
@@ -167,7 +170,15 @@ def process_log_data(spark, input_data, output_data):
     df = df.withColumn('start_time', get_timestamp(df.ts))
     
     # extract columns to create time table
-    time_table = df.select('start_time')         .dropna()         .dropDuplicates()         .withColumn('hour', hour('start_time'))         .withColumn('day', dayofmonth('start_time'))         .withColumn('week', weekofyear('start_time'))         .withColumn('month', month('start_time'))         .withColumn('year', year('start_time'))         .withColumn('weekday', dayofweek('start_time'))
+    time_table = df.select('start_time') \
+        .dropna() \
+        .dropDuplicates() \
+        .withColumn('hour', hour('start_time')) \
+        .withColumn('day', dayofmonth('start_time')) \
+        .withColumn('week', weekofyear('start_time')) \
+        .withColumn('month', month('start_time')) \
+        .withColumn('year', year('start_time')) \
+        .withColumn('weekday', dayofweek('start_time'))
     
     # write time table to parquet files partitioned by year and month
     time_table.write.partitionBy('year', 'month').parquet(output_data + 'time.parquet')
