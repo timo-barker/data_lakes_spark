@@ -13,7 +13,8 @@ However, before we can perform the actual ETL pipeline work, we must first creat
 3. Add a new rule to allow ingress to Port 22 for SSH connections from your IP address. Go to the AWS EMR console, select the name of your cluster. In the Summary tab, go to the Security and access section and click the link for `Security groups for Master`. When the screen refreshes, select the Security group ID that corresponds to the Security group name for `ElasticMapReduce-master`. Click the Edit inbound rules button. Scroll down and click the Add rule button. Select `SSH` from the first drop down menu. Select `My IP` from the second drop down manu. Click Save rules at the bottom of the screen. Repeat this process if your IP address changes.
 4. Create your own S3 bucket. Go to the AWS S3 console, click the Create bucket button. Choose a publicly visible and unique name for your bucket, for example *MyProcessedFilesProject4*. Select the region closest to your data source. Keep all the default settings and click the Create bucket button. Since the s3://udacity-dend/ data is located in us-west-2, I am also creating my S3 bucket in the same region.
 5. Create a VPC if one is not already setup. Go to the AWS VPC console, click the Create VPC button.
-6. Create the EMR default roles in AIM by running command `aws emr create-default-roles`.
+6. Open up your S3 bucket for access. We are going to allow access to to it from within the VPC. Go to the AWC VPC console and click on Your VPCs. Copy your VPC ID. Next, go to the AWS S3 console, and click on your S3 bucket name. Click on the Access Points tab. Click the Create access points button. Give your Access point a name and paste your VPC ID in the text box where it asks.
+7. Create the EMR default roles in AIM by running command `aws emr create-default-roles`.
 
 ## Create an EMR Cluster
 
