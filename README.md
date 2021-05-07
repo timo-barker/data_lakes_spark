@@ -12,6 +12,8 @@ However, before we can perform the actual ETL pipeline work, we must first creat
 2. Create an AWS EC2 key pair. Key pairs ensure that you alone have access to the instances that you launch. Go to the AWS EC2 console, click Key Pairs. On the Key Pairs page, click Create Key Pair. In the Create Key Pair dialog box, enter a name for your key pair, such as, *MyKeyPair*. Click Create. Save the resulting PEM file in a safe location.
 3. Add a new rule to allow ingress to Port 22 for SSH connections from your IP address. Go to the AWS EMR console, select the name of your cluster. In the Summary tab, go to the Security and access section and click the link for `Security groups for Master`. When the screen refreshes, select the Security group ID that corresponds to the Security group name for `ElasticMapReduce-master`. Click the Edit inbound rules button. Scroll down and click the Add rule button. Select `SSH` from the first drop down menu. Select `My IP` from the second drop down manu. Click Save rules at the bottom of the screen. Repeat this process if your IP address changes.
 4. Create your own S3 bucket. Go to the AWS S3 console, click the Create bucket button. Choose a publicly visible and unique name for your bucket, for example *MyProcessedFilesProject4*. Select the region closest to your data source. Keep all the default settings and click the Create bucket button. Since the s3://udacity-dend/ data is located in us-west-2, I am also creating my S3 bucket in the same region.
+5. Create a VPC if one is not already setup. Go to the AWS VPC console, click the Create VPC button.
+6. Create the EMR default roles in AIM by running command `aws emr create-default-roles`.
 
 ## Create an EMR Cluster
 
@@ -57,6 +59,16 @@ For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` 
 With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is USD $0.192/hr for on demand and USD $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be (USD $0.192 x 3 x 15/60) = USD $0.14.
 
 ## SSH py files to Master
+
+1. Connect using the SSH protocol. You can run the commands shown in the figure below in your terminal.
+```
+ssh -i AWS_EC2_Demo.pem hadoop@ec2-3-139-93-181.us-east-2.compute.amazonaws.com
+```
+When you have verified a successful connection, you can exit your connection. 
+
+2. 
+
+
 
 ```
 scp -v -i <.pem-file> <Local-Path> hadoop@<EMR-MasterNode-Endpoint>:~<EMR-path>
