@@ -25,16 +25,7 @@ YOUR_KEY_NAME: required, your IAM key name that is saved under .ssh/ directory.
 YOUR_BOOTSTRAP_FILENAME: optional, should be your bootstrap file, executable (.sh file) in an accessible S3 location. If you aren't going to use the bootstrap file, you can removed `--bootstrap-actions` tag.
  
 ```
-aws emr create-cluster 
---name 'SparkDemoCluster' 
---use-default-roles 
---release-label emr-5.28.0 
---instance-count 3 
---applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive 
---ec2-attributes KeyName=AWS_ECS_Demo_2
---instance-type m5.xlarge 
---region us-west-2 
---auto-terminate 
+aws emr create-cluster --name 'SparkDemoCluster' --use-default-roles --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive --ec2-attributes KeyName=AWS_ECS_Demo_2 --instance-type m5.xlarge --region us-west-2 --auto-terminate 
 ```
 
 This will give you something like this..
@@ -48,9 +39,9 @@ This will give you something like this..
 
 Go to AWS EMR console from your web browser, then check if the cluster is showing up. Or you can type;
 
-`aws emr describe-cluter --cluster-id <CLUSTER_ID FROM ABOVE>`
+`aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX`
 
-For example, I would do `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX` to see if this cluster is ready to go. Eventually, you should see a JSON attribute with the endpoint like such: 
+Keep checking to see if this cluster is ready to go. Eventually, you should see a JSON attribute with the endpoint like such: 
 
 ```
 "MasterPublicDnsName": "ec2-18-205-96-185.compute-1.amazonaws.com"
