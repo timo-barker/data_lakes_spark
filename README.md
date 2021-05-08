@@ -20,9 +20,9 @@ However, before we can perform the actual ETL pipeline work, we must first creat
 
 Once it's installed and configured, run the script below to launch a cluster. Revise anything in the `<>` to match your filename.
 
-YOUR_CLUSTER_NAME: required, anything you'd like!  
-YOUR_KEY_NAME: required, your IAM key name that is saved under .ssh/ directory.  
-YOUR_BOOTSTRAP_FILENAME: optional, should be your bootstrap file, executable (.sh file) in an accessible S3 location. If you aren't going to use the bootstrap file, you can removed `--bootstrap-actions` tag.
+--name 'SparkDemoCluster': required, anything you'd like!  
+--ec2-attributes KeyName=AWS_ECS_Demo_2: required, your IAM key name that is saved under .ssh/ directory.  
+--bootstrap-actions Path=<YOUR_BOOTSTRAP_FILENAME>: optional, should be your bootstrap file, executable (.sh file) in an accessible S3 location. If you aren't going to use the bootstrap file, you can removed `--bootstrap-actions` tag.
  
 ```
 aws emr create-cluster --name 'SparkDemoCluster' --use-default-roles --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive --ec2-attributes KeyName=AWS_ECS_Demo_2 --instance-type m5.xlarge --region us-west-2 --auto-terminate 
