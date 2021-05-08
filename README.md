@@ -45,7 +45,7 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 Scroll down to `END` and exit by pressing the `Q` key. Keep checking to see if this cluster is ready to go. Eventually, you should see a JSON attribute with the endpoint like such: 
 
 ```
-"MasterPublicDnsName": "ec2-18-205-96-185.compute-1.amazonaws.com"
+"MasterPublicDnsName": "ec2-3-139-93-181.us-west-2.compute.amazonaws.com"
 ```
 
 With the settings above, we are running 1 master, 2 core, and 0 task for a total of 3 nodes in our cluster. The [Amazon EMR Pricing](https://aws.amazon.com/emr/pricing) for m5.xlarge is USD $0.192/hr for on demand and USD $0.048/hr for spot. So if we run our cluster for 15 minutes, our cost for the assignment should be (USD $0.192 x 3 x 15/60) = USD $0.14.
@@ -54,7 +54,7 @@ With the settings above, we are running 1 master, 2 core, and 0 task for a total
 
 1. Connect using the SSH protocol. You can run the commands shown in the figure below in your terminal.
 ```
-ssh -v -i .aws/AWS_ECS_Demo_2.pem hadoop@ec2-3-139-93-181.us-east-2.compute.amazonaws.com
+ssh -v -i .aws/AWS_ECS_Demo_2.pem hadoop@ec2-3-139-93-181.us-west-2.compute.amazonaws.com
 ```
 When you have verified a successful connection, you can exit your connection. 
 
