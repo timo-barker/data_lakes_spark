@@ -56,11 +56,35 @@ With the settings above, we are running 1 master, 2 core, and 0 task for a total
 ```
 ssh -v -i .aws/AWS_ECS_Demo_2.pem hadoop@ec2-3-139-93-181.us-west-2.compute.amazonaws.com
 ```
-When you have verified a successful connection, you can exit your connection. 
+When you have verified a successful connection, you will be logged into the EMR shell. 
+```
+Last login: Sat May  8 21:32:23 2021
 
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+
+https://aws.amazon.com/amazon-linux-ami/2018.03-release-notes/
+56 package(s) needed for security, out of 102 available
+Run "sudo yum update" to apply all updates.
+                                                                    
+EEEEEEEEEEEEEEEEEEEE MMMMMMMM           MMMMMMMM RRRRRRRRRRRRRRR    
+E::::::::::::::::::E M:::::::M         M:::::::M R::::::::::::::R   
+EE:::::EEEEEEEEE:::E M::::::::M       M::::::::M R:::::RRRRRR:::::R 
+  E::::E       EEEEE M:::::::::M     M:::::::::M RR::::R      R::::R
+  E::::E             M::::::M:::M   M:::M::::::M   R:::R      R::::R
+  E:::::EEEEEEEEEE   M:::::M M:::M M:::M M:::::M   R:::RRRRRR:::::R 
+  E::::::::::::::E   M:::::M  M:::M:::M  M:::::M   R:::::::::::RR   
+  E:::::EEEEEEEEEE   M:::::M   M:::::M   M:::::M   R:::RRRRRR::::R  
+  E::::E             M:::::M    M:::M    M:::::M   R:::R      R::::R
+  E::::E       EEEEE M:::::M     MMM     M:::::M   R:::R      R::::R
+EE:::::EEEEEEEE::::E M:::::M             M:::::M   R:::R      R::::R
+E::::::::::::::::::E M:::::M             M:::::M RR::::R      R::::R
+EEEEEEEEEEEEEEEEEEEE MMMMMMM             MMMMMMM RRRRRRR      RRRRRR
+                                                                    
+[hadoop@ip-172-31-49-60 ~]$ 
+```
 2. 
-
-
 
 ```
 scp -v -i <.pem-file> <Local-Path> hadoop@<EMR-MasterNode-Endpoint>:~<EMR-path>
