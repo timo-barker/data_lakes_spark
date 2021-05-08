@@ -54,7 +54,7 @@ With the settings above, we are running 1 master, 2 core, and 0 task for a total
 
 1. Connect using the SSH protocol. You can run the commands shown in the figure below in your terminal.
 ```
-ssh -i AWS_EC2_Demo.pem hadoop@ec2-3-139-93-181.us-east-2.compute.amazonaws.com
+ssh -v -i .aws/AWS_ECS_Demo_2.pem hadoop@ec2-3-139-93-181.us-east-2.compute.amazonaws.com
 ```
 When you have verified a successful connection, you can exit your connection. 
 
