@@ -42,7 +42,7 @@ Go to AWS EMR console from your web browser, then check if the cluster is showin
 
 `aws emr describe-cluster --cluster-id j-2PZ79NHXO7YYX`
 
-Keep checking to see if this cluster is ready to go. Eventually, you should see a JSON attribute with the endpoint like such: 
+Scroll down to `END` and exit by pressing the `Q` key. Keep checking to see if this cluster is ready to go. Eventually, you should see a JSON attribute with the endpoint like such: 
 
 ```
 "MasterPublicDnsName": "ec2-18-205-96-185.compute-1.amazonaws.com"
