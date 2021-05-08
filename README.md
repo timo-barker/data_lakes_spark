@@ -26,7 +26,7 @@ Once it's installed and configured, run the script below to launch a cluster. Re
 --auto-terminate: : optional.
  
 ```
-aws emr create-cluster --name 'SparkDemoCluster' --use-default-roles --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive --ec2-attributes KeyName=AWS_ECS_Demo_2 --instance-type m5.xlarge --region us-west-2 --auto-terminate 
+aws emr create-cluster --name 'SparkDemoCluster' --use-default-roles --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive --ec2-attributes KeyName=AWS_ECS_Demo_2 --instance-type m5.xlarge --region us-west-2 --AvailabilityZone us-west-2b --auto-terminate 
 ```
 
 This will give you something like this..
