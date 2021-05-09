@@ -38,9 +38,10 @@ aws emr create-cluster \
 --release-label emr-5.33.0 \
 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
---instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,\
+--instance-fleets \
+InstanceFleetType=MASTER,TargetSpotCapacity=1,\
 InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.2}'] \
-InstanceFleetType=CORE,TargetSpotCapacity=1,\
+InstanceFleetType=CORE,TargetSpotCapacity=2,\
 InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.2}'] 
 ```
 
