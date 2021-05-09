@@ -32,17 +32,18 @@ for cheaper pricing:
 ```
 aws emr create-cluster \
 --name 'SparkDemoCluster' \
---applications Name=Hadoop Name=Spark Name=Livy Name=Zeppelin \
+--applications Name=Hadoop Name=Spark Name=Livy Name=Zeppelin Name=JupyterEnterpriseGateway \
 --region us-west-2 \
---ec2-attributes '{"KeyName":"AWS_ECS_Demo_2"}' \
+--ec2-attributes AvailabilityZone=us-west-2b \
+--ec2-attributes KeyName=AWS_ECS_Demo_2 \
 --release-label emr-5.33.0 \
 --service-role EMR_DefaultRole \
 --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole \
 --instance-fleets \
 InstanceFleetType=MASTER,TargetSpotCapacity=1,\
-InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.2}'] \
+InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.075}'] \
 InstanceFleetType=CORE,TargetSpotCapacity=2,\
-InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.2}'] 
+InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.075}'] 
 ```
 
 This will give you something like this..
