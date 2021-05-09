@@ -14,13 +14,13 @@ import getpass
 config = configparser.ConfigParser()
 config.read('dl.cfg')
 
-if config['AWS']['AWS_ACCESS_KEY_ID'] is None:
-    os.environ['AWS_ACCESS_KEY_ID'] = getpass.getpass(prompt='AWS_ACCESS_KEY_ID:')
-else:
+#if config['AWS']['AWS_ACCESS_KEY_ID'] is None:
+#    os.environ['AWS_ACCESS_KEY_ID'] = getpass.getpass(prompt='AWS_ACCESS_KEY_ID:')
+#else:
     os.environ['AWS_ACCESS_KEY_ID'] = config['AWS']['AWS_ACCESS_KEY_ID']
-if config['AWS']['AWS_SECRET_ACCESS_KEY'] is None:
-    os.environ['AWS_SECRET_ACCESS_KEY'] = getpass.getpass(prompt='AWS_SECRET_ACCESS_KEY:')
-else:
+#if config['AWS']['AWS_SECRET_ACCESS_KEY'] is None:
+#    os.environ['AWS_SECRET_ACCESS_KEY'] = getpass.getpass(prompt='AWS_SECRET_ACCESS_KEY:')
+#else:
     os.environ['AWS_SECRET_ACCESS_KEY'] = config['AWS']['AWS_SECRET_ACCESS_KEY']
 
 
@@ -40,7 +40,7 @@ def process_song_data(spark, input_data, output_data):
     '''
     Extract song and artist information from song data and save them to S3.
     
-    Keyword arguements:
+    Arguements:
     spark -- the Spark session object to perform procs on 
     input_data -- the S3 bucket source to read files from
     output_data -- the S3 bucket target to write files to
@@ -56,6 +56,7 @@ def process_song_data(spark, input_data, output_data):
     df.createOrReplaceTempView('staging_songs')
 
     # extract columns to create songs table
+    #songs_table = df.select('song_id','title','artist_id','year','duration')
     songs_table = spark.sql('''
         SELECT
             song_id
@@ -82,10 +83,12 @@ def process_song_data(spark, input_data, output_data):
     ''')
     
     # write songs table to parquet files partitioned by year and artist
-    #songs_table.write.mode('overwrite').partitionBy('year','artist_id').parquet(output_data+'songs.parquet')
-    songs_table.write.mode('overwrite').partitionBy('year','artist_id').parquet(output_data+'songs/')
+    songs_table.write.mode('overwrite').partitionBy('year', 'artist_id').parquet(output_data + 'songs.parquet')
 
     # extract columns to create artists table
+    #artists_table = df.selectExpr('artist_id AS artist_id', 'artist_name AS name', \
+    #                              'artist_location AS location', 'artist_latitude AS latitude', \
+    #                              'artist_longitude AS longitude')
     artists_table = spark.sql('''
         SELECT
             artist_id
@@ -112,8 +115,7 @@ def process_song_data(spark, input_data, output_data):
     ''')
     
     # write artists table to parquet files
-    #artists_table.mode('overwrite').write.parquet(output_data+'artists.parquet')
-    artists_table.mode('overwrite').write.parquet(output_data+'artists/')
+    artists_table.mode('overwrite').write.parquet(output_data + 'artists.parquet')
 
 
 def process_log_data(spark, input_data, output_data):
@@ -138,7 +140,10 @@ def process_log_data(spark, input_data, output_data):
     # create temp view for SQL wrangling
     df.createOrReplaceTempView('staging_events')
 
-    # extract columns for users table    
+    # extract columns for users table 
+    #users_table = df.selectExpr('userId AS user_id', 'firstName AS first_name', 
+    #                            'lastName AS last_name', 'gender AS gender', 
+    #                            'level AS level')
     users_table = spark.sql('''
         SELECT
             user_Id AS user_id
@@ -165,12 +170,11 @@ def process_log_data(spark, input_data, output_data):
     ''')
     
     # write users table to parquet files
-    #users_table.write.mode('overwrite').parquet(output_data+'users.parquet')
-    users_table.write.mode('overwrite').parquet(output_data+'users/')
+    users_table.write.mode('overwrite').parquet(output_data + 'users.parquet')
 
     # create timestamp column from original timestamp column
-    get_timestamp = udf(lambda x: datetime.datetime.fromtimestamp(x / 1000), TimestampType())
-    df = df.withColumn('start_time', get_timestamp(df.ts))
+    get_timestamp = udf(lambda ms: datetime.fromtimestamp(ms // 1000), TimestampType())
+    df = df.withColumn('start_time', get_timestamp(col('ts')))
     
     # extract columns to create time table
     time_table = df.select('start_time') \
@@ -184,8 +188,7 @@ def process_log_data(spark, input_data, output_data):
         .withColumn('weekday', dayofweek('start_time'))
     
     # write time table to parquet files partitioned by year and month
-    #time_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'time.parquet')
-    time_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'time/')
+    time_table.write.mode('overwrite').partitionBy('year', 'month').parquet(output_data + 'time.parquet')
 
     # read in time data to use for songplays table
     time_table.createOrReplaceTempView('staging_time')
@@ -219,8 +222,7 @@ def process_log_data(spark, input_data, output_data):
     ''')  
     
     # write songplays table to parquet files partitioned by year and month
-    #songplays_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'songplays.parquet')
-    songplays_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'songplays/')
+    songplays_table.write.mode('overwrite').partitionBy('year', 'month').parquet(output_data + 'songplays.parquet')
 
 
 def main():
