@@ -47,10 +47,10 @@ def process_song_data(spark, input_data, output_data):
     '''
     
     # get filepath to song data file
-    song_data = 'song-data/*/*/*/*.json'
+    song_data = input_data + 'song-data/*/*/*/*.json'
     
     # read song data file
-    df = spark.read.json(input_data + song_data)
+    df = spark.read.json(song_data)
     
     # create temp view for SQL wrangling
     df.createOrReplaceTempView('staging_songs')
@@ -82,7 +82,8 @@ def process_song_data(spark, input_data, output_data):
     ''')
     
     # write songs table to parquet files partitioned by year and artist
-    songs_table.write.partitionBy('year', 'artist_id').parquet(output_data + 'songs.parquet')
+    #songs_table.write.mode('overwrite').partitionBy('year','artist_id').parquet(output_data+'songs.parquet')
+    songs_table.write.mode('overwrite').partitionBy('year','artist_id').parquet(output_data+'songs/')
 
     # extract columns to create artists table
     artists_table = spark.sql('''
@@ -111,7 +112,8 @@ def process_song_data(spark, input_data, output_data):
     ''')
     
     # write artists table to parquet files
-    artists_table.write.parquet(output_data + 'artists.parquet')
+    #artists_table.mode('overwrite').write.parquet(output_data+'artists.parquet')
+    artists_table.mode('overwrite').write.parquet(output_data+'artists/')
 
 
 def process_log_data(spark, input_data, output_data):
@@ -125,10 +127,10 @@ def process_log_data(spark, input_data, output_data):
     '''
     
     # get filepath to log data file
-    log_data = 'log-data/*/*/*.json'
+    log_data = input_data + 'log-data/*/*/*.json'
 
     # read log data file
-    df = spark.read.json(input_data + log_data)
+    df = spark.read.json(log_data)
     
     # filter by actions for song plays
     df = df.filter(df.page == 'NextSong')
@@ -163,7 +165,8 @@ def process_log_data(spark, input_data, output_data):
     ''')
     
     # write users table to parquet files
-    users_table.write.parquet(output_data + 'users.parquet')
+    #users_table.write.mode('overwrite').parquet(output_data+'users.parquet')
+    users_table.write.mode('overwrite').parquet(output_data+'users/')
 
     # create timestamp column from original timestamp column
     get_timestamp = udf(lambda x: datetime.datetime.fromtimestamp(x / 1000), TimestampType())
@@ -181,7 +184,8 @@ def process_log_data(spark, input_data, output_data):
         .withColumn('weekday', dayofweek('start_time'))
     
     # write time table to parquet files partitioned by year and month
-    time_table.write.partitionBy('year', 'month').parquet(output_data + 'time.parquet')
+    #time_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'time.parquet')
+    time_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'time/')
 
     # read in time data to use for songplays table
     time_table.createOrReplaceTempView('staging_time')
@@ -215,7 +219,8 @@ def process_log_data(spark, input_data, output_data):
     ''')  
     
     # write songplays table to parquet files partitioned by year and month
-    songplays_table.write.partitionBy('year', 'month').parquet(output_data + 'songplays.parquet')
+    #songplays_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'songplays.parquet')
+    songplays_table.write.mode('overwrite').partitionBy('year','month').parquet(output_data+'songplays/')
 
 
 def main():
