@@ -8,7 +8,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf, col
 from pyspark.sql.functions import year, month, dayofmonth, hour, weekofyear, date_format
 from pyspark.sql.functions import to_timestamp, monotonically_increasing_id
-import getpass
+#import getpass
 
 
 config = configparser.ConfigParser()
@@ -17,11 +17,11 @@ config.read('dl.cfg')
 #if config['AWS']['AWS_ACCESS_KEY_ID'] is None:
 #    os.environ['AWS_ACCESS_KEY_ID'] = getpass.getpass(prompt='AWS_ACCESS_KEY_ID:')
 #else:
-    os.environ['AWS_ACCESS_KEY_ID'] = config['AWS']['AWS_ACCESS_KEY_ID']
+os.environ['AWS_ACCESS_KEY_ID'] = config['AWS']['AWS_ACCESS_KEY_ID']
 #if config['AWS']['AWS_SECRET_ACCESS_KEY'] is None:
 #    os.environ['AWS_SECRET_ACCESS_KEY'] = getpass.getpass(prompt='AWS_SECRET_ACCESS_KEY:')
 #else:
-    os.environ['AWS_SECRET_ACCESS_KEY'] = config['AWS']['AWS_SECRET_ACCESS_KEY']
+os.environ['AWS_SECRET_ACCESS_KEY'] = config['AWS']['AWS_SECRET_ACCESS_KEY']
 
 
 def create_spark_session():
