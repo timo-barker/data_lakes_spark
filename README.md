@@ -28,6 +28,10 @@ Once it's installed and configured, run the script below to launch a cluster. Re
 ```
 aws emr create-cluster --name 'SparkDemoCluster' --use-default-roles --release-label emr-5.28.0 --instance-count 3 --applications Name=Spark Name=Hadoop Name=Livy Name=Zeppelin Name=Hive --ec2-attributes KeyName=AWS_ECS_Demo_2 --instance-type m5.xlarge --region us-west-2 --auto-terminate 
 ```
+for cheaper pricing:
+```
+aws emr create-cluster --applications Name=Hadoop Name=Spark Name=Livy Name=Zeppelin --region us-west-2 --ec2-attributes KeyName=AWS_ECS_Demo_2 --release-label emr-5.33.0 --service-role EMR_DefaultRole --ec2-attributes InstanceProfile=EMR_EC2_DefaultRole --instance-fleets InstanceFleetType=MASTER,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.05}'] InstanceFleetType=CORE,TargetSpotCapacity=1,InstanceTypeConfigs=['{InstanceType=m5.xlarge,BidPrice=0.05}'] 
+```
 
 This will give you something like this..
 
